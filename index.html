@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>PORTFOLIO</title>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css" />
+         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <style>
+            html{
+                font-family: "Lucida Grande", Verdana, Arial, Sans-serif;
+                color: #444;
+            }
+            
+            a{
+                color: #444;
+            }
+            
+            #fixed{
+                position: fixed;
+                width: 240px; 
+                top: 0; 
+                left 0; 
+                text-align: center; 
+                min-height: 600px;
+            }
+            
+            #fixed h1{
+                font-weight: bold;
+                padding: 30px 0 20px 0;
+                cursor: pointer;
+            }
+            
+            #fixed ul li{
+                border-top: 1px #aaa solid;
+                padding: 5px 0;
+                font-size: 0.9em;
+                cursor: pointer;
+            }
+            
+            #fixed ul li:last-of-type{
+                border-bottom: 1px #aaa solid;
+            }
+            
+            #fixed address{
+                width: 100%;
+                margin-top: 40px;
+                color: #888;
+                font-size: 0.9em;
+            }
+            
+            #main{
+                margin-left: 260px;
+                padding: 25px 10px;
+            }
+            
+            #main div{
+                min-height: 250px;
+            }
+            
+            #main h2{
+                padding: 5px 0;
+                width: 180px;
+                border-radius: 5px;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
+            .thumb{
+                margin: 10px 10px 0px 0px;
+                display: inline-block;
+                height: 200px;
+                width: 200px;
+                border: 1px solid #ddd;
+                position: relative;
+            }
+            
+            .thumb span{
+                position: absolute;
+                text-align: center;
+                width: 100%;
+                bottom: 45%;
+            }
+            
+            h1#title{
+                font-weight: bold;
+                font-size: 2em;
+                border-bottom: 1px solid #aaa;
+                padding: 5px;
+                margin-bottom: 10px;
+            }
+            
+            p#article{
+                line-height: 1.3em;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div id="fixed">
+            <h1>
+            MY<br/>PORTFOLIO
+            </h1>
+            <ul>
+                <li>HTML/CSS</li>
+                <li>JavaScript+PHP</li>
+                <li>Java</li>
+                <li>Others</li>
+            </ul>
+            <address>e-mail:<br>
+                xxx@yyy.ac.jp
+            </address>
+        </div>
+        
+        <div id="main">
+        {block:IndexPage}
+            <div id="HTMLCSS">
+                <h2 style="background: #8f8">HTML/CSS</h2>
+                <div class="contentslist">
+                    <a href="">
+                        <span class="thumb">
+                        <span>Umbrellahead</span>
+                        </span>
+                    </a>
+                    <a href="">
+                        <span class="thumb">
+                        <span>Old Portfolio</span>
+                        </span>
+                    </a>
+    </div>
+            </div>
+            <div id="JavaScriptPHP">
+                <h2 style="background: #aff">JavaScript+PHP</h2>
+                <div class="contentslist">
+                    <a href="">
+                        <span class="thumb">
+                        <span>TwitKJ</span>
+                        </span>
+                    </a>
+                    <a href="">
+                        <span class="thumb">
+                        <span>Parallax Manga Viewer</span>
+                        </span>
+                    </a>
+                    <a href="">
+                        <span class="thumb">
+                        <span>Clickable Map</span>
+                        </span>
+                    </a>
+                    <a href="">
+                        <span class="thumb">
+                        <span>New Manga Ranker<br>(in Progress)</span>
+                        </span>
+                    </a>
+                    </div>
+            </div>
+            <div id="Java">
+                <h2 style="background: #fbd">Java</h2>
+                <div class="contentslist">
+                    <a href="">
+                        <span class="thumb">
+                        <span>Old Manga Ranker</span>
+                        </span>
+                    </a>
+                    </div.
+            </div>
+            <div id="Others">
+                <h2 style="background: #ccc">Others</h2>
+                <div class="contentslist">
+                    <a href="">
+                        <span class="thumb">
+                        <span>Colorful Spray</span>
+                        </span>
+                    </a>
+                    </div>
+            </div>
+        </div>
+        {/block:IndexPage}    
+        
+        {block:PermalinkPage}
+            {block:Posts}
+                {block:PermalinkPagination}
+                <p>
+                    {block:NextPost}<a href="{NextPost}">&lt;</a>
+                    {/block:NextPost} | {block:PreviousPost}
+                    <a href="{PreviousPost}">&gt;
+                    {/block:PreviousPost}</a>
+                </p>
+                {/block:PermalinkPagination}
+            
+                {block:Text}
+                    <h1 id="title">{block:Title}{Title}{/block:Title}</h1>
+                    <div id="article">{Body}</div>
+                    {block:HasTags}
+                        <ul>
+                        {block:Tags}
+                        <li><a href="{TagURL}">#{Tag}</a></li>
+                        {/block:Tags}
+                        </ul>
+                    {/block:HasTags}
+                {/block:Text}
+            {/block:Posts}
+        {/block:PermalinkPage}
+        
+        
+        <script>
+            $(function (){
+                
+                $("#fixed ul li").hover(function (){
+                    $(this).css("background","#eee");
+                    
+                }, function (){
+                    $(this).css("background","#fff");
+                    
+                });
+                
+                $("#fixed ul li").click(function (){
+                    var scrollTo = "#" + $(this).html().replace(/(\/|\+)/,'');
+                    {block:IndexPage}
+                    $("html,body").animate({scrollTop: $(scrollTo).offset().top},"fast");
+                    {/block:IndexPage}
+                    
+                    {block:PermalinkPage}
+                    window.location.href = "/" + scrollTo;
+                    {/block:PermalinkPage}
+                });
+                
+                $("#fixed h1").click(function (){
+                    {block:IndexPage}
+                    $("html,body").animate({scrollTop: 0},"fast");
+                    {/block:IndexPage}
+                    
+                    {block:PermalinkPage}
+                    window.location.href = "/";
+                    {/block:PermalinkPage}
+                    
+                    
+                });
+                
+                });
+        
+        </script>
+    </body>
+</html>
